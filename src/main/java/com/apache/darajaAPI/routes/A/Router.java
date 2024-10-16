@@ -49,15 +49,14 @@ public class Router extends RouteBuilder {
                         e.printStackTrace();
                         // Handle exception appropriately (e.g., throw error)
                     }
-                })
-                .to("http4:" + url); // Optional: Can be removed if not needed
+                });
     }
 
     // This method needs to be implemented based on Safaricom's response format
     private String extractToken(String responseBody) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            Map responseMap = mapper.readValue(responseBody, Map.class);
+            Map<String, Object> responseMap = mapper.readValue(responseBody, Map.class);
             return (String) responseMap.get("access_token"); // Return the extracted token
         } catch (JsonProcessingException e) {
             e.printStackTrace();
